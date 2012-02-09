@@ -40,6 +40,8 @@ function nep_user_register( $user_id ) {
 }
 
 function nep_remove_email_checkbox() {
-  wp_enqueue_script( 'nep_remove_email_checkbox', plugins_url('/js/nep_remove_email_checkbox.js', __FILE__) );
+  $password = wp_generate_password( 64, false );
+  wp_enqueue_script( 'nep_remove_email_checkbox', plugins_url('/js/nep_remove_email_checkbox.js', __FILE__), array(), false, true );
+  wp_localize_script( 'nep_remove_email_checkbox', 'NeverEmailPasswords', array('password' => $password) );
 }
 ?>
