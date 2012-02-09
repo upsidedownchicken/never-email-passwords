@@ -9,6 +9,6 @@ With NEP, new user passwords are never emailed. Once the new user resets their p
 
 ## Issues
 
-- NEP should also set the initial password for the new user so even the site admin never knows the user's password.
-- NEP should only run on the 'Add New User' page (it currently runs on all admin pages).
-- NEP should check the submitted form and force the `send_password` field to '0'.
+- #1 NEP should also set the initial password for the new user so even the site admin never knows the user's password.
+- #2 NEP should only run on the 'Add New User' page (it currently runs on all admin pages).
+- #3 NEP should check the submitted form and force the `send_password` field to '0'.
