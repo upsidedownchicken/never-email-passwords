@@ -26,8 +26,9 @@ function nep_user_register( $user_id ) {
 
   $wpdb->update($wpdb->users, array('user_activation_key' => $key), array('user_login' => $user_data->user_login));
 
-  $subject = 'Update your password';
-  $body = 'Click here to update your password: ' .
+  $blog_name = get_bloginfo('name');
+  $subject = "Update your $blog_name password";
+  $body = nep_message_body( $blog_name ) .
     network_site_url("wp-login.php?action=rp&key=$key&login=" . rawurlencode($user_data->user_login), 'login');
 
   if ( ! wp_mail($user_data->user_email, $subject, $body) ) {
@@ -43,5 +44,12 @@ function nep_remove_email_checkbox() {
   $password = wp_generate_password( 64, false );
   wp_enqueue_script( 'nep_remove_email_checkbox', plugins_url('/js/nep_remove_email_checkbox.js', __FILE__), array(), false, true );
   wp_localize_script( 'nep_remove_email_checkbox', 'NeverEmailPasswords', array('password' => $password) );
+}
+
+function nep_message_body( $blog_name ) {
+  return <<<EOB
+A site administrator has created an account for you at $blog_name. If you did not request this, you can safely ignore this message. Otherwise, please click on the following link to set your password.
+
+EOB;
 }
 ?>
