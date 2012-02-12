@@ -7,10 +7,8 @@
  * Description: Send new users a reset password link when their account is created.
  */
 
-if ( 'users.php' == $pagenow || 'user-new.php' == $pagenow ) {
-  add_action( 'user_register', 'nep_user_register' );
-  add_action( 'admin_print_scripts', 'nep_remove_email_checkbox' );
-}
+add_action( 'user_register', 'nep_user_register' );
+add_action( 'admin_print_scripts', 'nep_remove_email_checkbox' );
 
 function nep_user_register( $user_id ) {
   global $wpdb;
